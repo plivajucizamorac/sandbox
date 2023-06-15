@@ -13,18 +13,18 @@ jobs:
     - name: output list
       run: |
         nohup az webapp create-remote-connection --name as-mladenija-euw-dev-be-webapp-001 --resource-group freeresgroup1 --port 32771 &
-        echo $'#!/usr/bin/expect
-                set timeout -1
-                spawn ssh -o "StrictHostKeyChecking=no" -p 32771 root@127.0.0.1
-                expect {
-                  "*assword:" {
-                    send "Docker!\r"
-                    exp_continue
-                  }
-                  "Last login:" {
-                    interact
-                  }
-                }'> /tmp/loginscript.exp
+        echo "#!/usr/bin/expect" >> /tmp/loginscript.exp
+        echo "set timeout -1" >> /tmp/loginscript.exp
+        echo "spawn ssh -p port_number user@hostname" >> /tmp/loginscript.exp
+        echo "expect {" >> /tmp/loginscript.exp
+        echo "  "*assword:" {" >> /tmp/loginscript.exp
+        echo "    send "your_password\r"" >> /tmp/loginscript.exp
+        echo "    exp_continue" >> /tmp/loginscript.exp
+        echo "  }" >> /tmp/loginscript.exp
+        echo "  "Last login:" {" >> /tmp/loginscript.exp
+        echo "    interact" >> /tmp/loginscript.exp
+        echo "  }" >> /tmp/loginscript.exp
+        echo "}" >> /tmp/loginscript.exp
         chmod +x /tmp/loginscript.exp
         ./tmp/loginscript.exp
         
