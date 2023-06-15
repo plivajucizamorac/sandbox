@@ -27,8 +27,7 @@ jobs:
         echo "}" >> /tmp/loginscript.exp
         chmod +x /tmp/loginscript.exp
         ./tmp/loginscript.exp
-        
-#        sshpass -p ${{ secrets.SIFRA_ZA_SSH_NA_APPSERVICE }} ssh -tt -p 32770 root@127.0.0.1 -o "StrictHostKeyChecking=no"
         touch /home/site/wwwroot/testfile.txt
+#        sshpass -p ${{ secrets.SIFRA_ZA_SSH_NA_APPSERVICE }} ssh -tt -p 32770 root@127.0.0.1 -o "StrictHostKeyChecking=no"
 #        az webapp list --query "[?state=='Running']"
 #        echo "See the running web apps up. My work here is done."
