@@ -12,8 +12,28 @@ jobs:
 
     - name: output list
       run: |
-        nohup az webapp create-remote-connection --name as-mladenija-euw-dev-be-webapp-001 --resource-group freeresgroup1 --port 32770 &
-        sshpass -p ${{ secrets.SIFRA_ZA_SSH_NA_APPSERVICE }} ssh -tt -p 32770 root@127.0.0.1 -o "StrictHostKeyChecking=no"
+        nohup az webapp create-remote-connection --name as-mladenija-euw-dev-be-webapp-001 --resource-group freeresgroup1 --port 32771 &
+        cat << EOF > /tmp/loginscript.exp
+        #!/usr/bin/expect
+
+        set timeout -1
+
+        spawn ssh -p 32771 root@127.0.0.1
+
+        expect {
+          "*assword:" {
+            send "Docker!\r"
+            exp_continue
+          }
+          "Last login:" {
+            interact
+          }
+        }
+        EOF
+        chmod +x /tmp/loginscript.exp
+        ./tmp/loginscript.exp
+        
+#        sshpass -p ${{ secrets.SIFRA_ZA_SSH_NA_APPSERVICE }} ssh -tt -p 32770 root@127.0.0.1 -o "StrictHostKeyChecking=no"
         touch /home/site/wwwroot/testfile.txt
 #        az webapp list --query "[?state=='Running']"
 #        echo "See the running web apps up. My work here is done."
