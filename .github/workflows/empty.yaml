@@ -13,6 +13,7 @@ jobs:
     - name: output list
       run: |
         nohup az webapp create-remote-connection --name as-mladenija-euw-dev-be-webapp-001 --resource-group freeresgroup1 --port 32771 &
+        apt-get install expect
         echo "#!/usr/bin/expect" >> loginscript.exp
         echo "set timeout -1" >> loginscript.exp
         echo "spawn ssh -p port_number user@hostname" >> loginscript.exp
