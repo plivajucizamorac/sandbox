@@ -16,10 +16,10 @@ jobs:
         sudo apt-get install expect
         echo "#!/usr/bin/expect" >> loginscript.exp
         echo "set timeout -1" >> loginscript.exp
-        echo "spawn ssh -p port_number user@hostname" >> loginscript.exp
+        echo "spawn ssh -p 32768 root@127.0.0.1" >> loginscript.exp
         echo "expect {" >> loginscript.exp
         echo "  "*assword:" {" >> loginscript.exp
-        echo "    send "your_password\r"" >> loginscript.exp
+        echo "    send "Docker!\r"" >> loginscript.exp
         echo "    exp_continue" >> loginscript.exp
         echo "  }" >> loginscript.exp
         echo "  "Last login:" {" >> loginscript.exp
