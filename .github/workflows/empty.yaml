@@ -6,11 +6,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: azure/login@v1
-        with:
+    - uses: azure/login@v1
+      with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: output list
-        run: |
-          az webapp list --query "[?state=='Running']"
-          echo "See the running web apps up. My work here is done."
+    - name: output list
+      run: |
+        az webapp list --query "[?state=='Running']"
+        echo "See the running web apps up. My work here is done."
