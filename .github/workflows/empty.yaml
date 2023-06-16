@@ -15,7 +15,7 @@ jobs:
         nohup az webapp create-remote-connection --name as-mladenija-euw-dev-be-webapp-001 --resource-group freeresgroup1 --port 2222 &
         sleep 10
         echo "Docker!" > file1.txt
-        sshpass -f file1.txt ssh root@127.0.0.1 -T -p 2222 -o "StrictHostKeyChecking=no" && ls && touch /home/site/wwwroot/testfile.txt
+        sshpass -f file1.txt ssh root@127.0.0.1 -T -p 2222 -o "StrictHostKeyChecking=no" 'touch /home/site/wwwroot/testfile.txt; bash'
         echo "Done!"
 #        ls
 #        touch /home/site/wwwroot/testfile.txt
