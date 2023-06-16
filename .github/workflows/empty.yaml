@@ -16,9 +16,9 @@ jobs:
         sleep 10
         echo "Docker!" > file1.txt
         sshpass -f file1.txt ssh root@127.0.0.1 -T -p 2222 -o "StrictHostKeyChecking=no" && ls && touch /home/site/wwwroot/testfile.txt
+        echo "Done!"
 #        ls
 #        touch /home/site/wwwroot/testfile.txt
-        echo "Done!"
 #        sshpass -p ${{ secrets.SIFRA_ZA_SSH_NA_APPSERVICE }} ssh -tt -p 32770 root@127.0.0.1 -o "StrictHostKeyChecking=no"
 #        az webapp list --query "[?state=='Running']"
 #        echo "See the running web apps up. My work here is done."
