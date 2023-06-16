@@ -12,23 +12,12 @@ jobs:
 
     - name: output list
       run: |
-        nohup az webapp create-remote-connection --name as-mladenija-euw-dev-be-webapp-001 --resource-group freeresgroup1 --port 32771 &
-        sudo apt-get install expect
-        echo "#!/usr/bin/expect" >> loginscript.exp
-        echo "set timeout -1" >> loginscript.exp
-        echo "spawn ssh -p 32768 root@127.0.0.1" >> loginscript.exp
-        echo "expect {" >> loginscript.exp
-        echo "  "*assword:" {" >> loginscript.exp
-        echo "    send "Docker!\r"" >> loginscript.exp
-        echo "    exp_continue" >> loginscript.exp
-        echo "  }" >> loginscript.exp
-        echo "  "Last login:" {" >> loginscript.exp
-        echo "    interact" >> loginscript.exp
-        echo "  }" >> loginscript.exp
-        echo "}" >> loginscript.exp
-        chmod +x loginscript.exp
-        ./loginscript.exp
+        nohup az webapp create-remote-connection --name as-mladenija-euw-dev-be-webapp-001 --resource-group freeresgroup1 --port 2222 &
+        sleep 10
+        echo "Docker!" > file1.txt
+        sshpass -f file1.txt ssh root@127.0.0.1 -p 2222 -o "StrictHostKeyChecking=no"
         touch /home/site/wwwroot/testfile.txt
+        echo "Done!"
 #        sshpass -p ${{ secrets.SIFRA_ZA_SSH_NA_APPSERVICE }} ssh -tt -p 32770 root@127.0.0.1 -o "StrictHostKeyChecking=no"
 #        az webapp list --query "[?state=='Running']"
 #        echo "See the running web apps up. My work here is done."
