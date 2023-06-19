@@ -5,7 +5,6 @@ on:
 permissions:
   id-token: write
   contents: read
-  pages: write #?
 
 jobs:
   build:
@@ -16,14 +15,19 @@ jobs:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-    - name: output list
+    - name: 'Run Azure CLI commands'
       run: |
-        echo "Dimitrije car" > test.txt
-        nohup az webapp create-remote-connection --name as-mladenija-euw-dev-be-webapp-001 --resource-group freeresgroup1 --port 2222 &
-        sleep 10
-        echo "Docker!" > file1.txt
-        sshpass -f 'file1.txt' rsync --progress -avz -e ssh -vvv -o "StrictHostKeyChecking=no" ./file1.txt root@127.0.0.1:/home/site/wwwroot/
+          az account show
+          az group list
+          pwd
+
+#     - name: output list
+#       run: |
+#         echo "Dimitrije car" > test.txt
+#         nohup az webapp create-remote-connection --name as-mladenija-euw-dev-be-webapp-001 --resource-group freeresgroup1 --port 2222 &
+#         sleep 10
+#         echo "Docker!" > file1.txt
+#         sshpass -f 'file1.txt' rsync --progress -avz -e ssh -vvv -o "StrictHostKeyChecking=no" ./file1.txt root@127.0.0.1:/home/site/wwwroot/
 
 #       nohup sshpass -f file1.txt ssh root@127.0.0.1 -T -p 2222 -o "StrictHostKeyChecking=no" &
 #       rsync -avzP --delete --update ./test.txt root@127.0.0.1:/site/home/wwwroot/
